@@ -1,12 +1,15 @@
-#########Peer graded assignment week 3 ####################
-#Programming assignment
-#Lexical scoping
+######### Peer graded assignment week 3 ####################
+# Programming assignment
+# Lexical scoping
 
 ######LIBRARIES###########################################
 library(dplyr)                                           #
 ##########################################################
+# The following function makeCacheMatrix  creates a special matrix object, that can cache the inverse of the matrix, 
+# if the inverse was calculated by the seond function cacheSolve.
+# The function Cachesolve will calculate the inverse of the matrix, when the function is called for the first time, 
+# otherwise the function will return the inverse of the matrix from the cache.
 
-#creating the cache matrix
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
   set <- function(y) {
@@ -18,14 +21,15 @@ makeCacheMatrix <- function(x = matrix()) {
   getinverse <- function() inv
   list(set = set, get = get,
        setinverse = setinverse,
-       getinverse= getinverse)
+       getinverse = getinverse)
 }
   
-#function to search for cache data or compute the inverse of matrix
+# The function Cachesolve will calculate the inverse of the matrix, when the function is called for the first time, 
+# otherwise the function will return the inverse of the matrix from the cache.
 cacheSolve <- function(x, ...) {
   inv <- x$getinverse()
   if(!is.null(inv)) {
-    message("getting cached data")
+    message("getting cached inversed matrix")
     return(inv)
   }
   data <- x$get()
@@ -34,11 +38,11 @@ cacheSolve <- function(x, ...) {
   inv
 }
 
-#create a matrix
+# Create a matrix 
 y = matrix(rnorm(n=100, mean=10, sd=2),
            nrow=10, ncol=10, byrow=T)
 y1 = makeCacheMatrix(y)
 
-#test the inverse function
+# Test cachSolve with the created matrix
 cacheSolve(y1)
 
